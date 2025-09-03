@@ -1,0 +1,93 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+>
+    <Dialog
+        id="createCustomerDialog"
+        title="Yeni Müşteri Oluştur"
+        contentWidth="500px"
+        contentHeight="600px"
+    >
+        <content>
+            <form:SimpleForm
+                layout="ResponsiveGridLayout"
+                editable="true"
+                columnsM="1"
+                columnsL="1"
+            >
+                <form:content>
+                    <Label
+                        text="Ad"
+                        required="true"
+                    />
+                    <Input
+                        id="firstNameInput"
+                        value="{createCustomerModel>/IvFirstName}"
+                        maxLength="40"
+                        required="true"
+                    />
+                    <!-- <Label
+                        text="Ad2"
+                        required="true"
+                    />
+                    <Input
+                        id="firstNameInput2"
+                        value="{oMainViewModel>/createCustomer/IvLastName}"
+                        maxLength="40"
+                        required="true"
+                    /> -->
+
+                    <Label text="Soyad" />
+                    <Input
+                        id="lastNameInput"
+                        value="{createCustomerModel>/IvLastName}"
+                        maxLength="40"
+                    />
+
+                    <Label text="Email" />
+                    <Input
+                        id="emailInput"
+                        value="{createCustomerModel>/IvEmail}"
+                        type="Email"
+                        maxLength="100"
+                    />
+
+                    <Label text="Telefon" />
+                    <Input
+                        id="phoneInput"
+                        value="{createCustomerModel>/IvPhone}"
+                        maxLength="20"
+                    />
+
+                    <Label text="Şehir" />
+                    <Input
+                        id="cityInput"
+                        value="{createCustomerModel>/IvCity}"
+                        maxLength="40"
+                    />
+
+                    <Label text="Ülke" />
+                    <Input
+                        id="countryInput"
+                        value="{createCustomerModel>/IvCountry}"
+                        maxLength="3"
+                    />
+                </form:content>
+            </form:SimpleForm>
+        </content>
+        <buttons>
+            <Button
+                text="Kaydet"
+                type="Emphasized"
+                press="onSaveCustomer"
+                enabled="{= ${createCustomerModel>/IvFirstName} !== '' }"
+                busy="{oMainViewModel>/busy}"
+            />
+            <Button
+                text="İptal"
+                press="onCancelCreateCustomer"
+            />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

@@ -23,6 +23,14 @@
                             id="title"
                             text="Products"
                         />
+                        <ToolbarSpacer />
+                        <Button
+                            id="createCustomerButton"
+                            text="Müşteri Yarat"
+                            type="Success"
+                            icon="sap-icon://add"
+                            press="onCreateCustomer"
+                        />
                     </OverflowToolbar>
                 </table:extension>
 
