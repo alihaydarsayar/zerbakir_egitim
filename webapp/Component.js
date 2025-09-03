@@ -3,11 +3,12 @@
  */
 
 sap.ui.define([
-        "sap/ui/core/UIComponent",
-        "sap/ui/Device",
-        "com/golive/erbakir/zerbakiregitim/model/models"
-    ],
-    function (UIComponent, Device, models) {
+    "sap/ui/core/UIComponent",
+    "sap/ui/Device",
+    "com/golive/erbakir/zerbakiregitim/model/models",
+    "sap/ui/model/json/JSONModel"
+],
+    function (UIComponent, Device, models, JSONModel) {
         "use strict";
 
         return UIComponent.extend("com.golive.erbakir.zerbakiregitim.Component", {
@@ -29,6 +30,17 @@ sap.ui.define([
 
                 // set the device model
                 this.setModel(models.createDeviceModel(), "device");
+
+                var oGlobalCompJsonModel = new JSONModel(
+                    {
+                        busy: false,
+                        title: "ER-Bakır Eğitim"
+                    }
+                );
+
+                this.setModel(oGlobalCompJsonModel, "oGlobalCompModel");
+
+
             }
         });
     }

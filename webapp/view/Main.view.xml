@@ -1,7 +1,109 @@
-<mvc:View controllerName="com.golive.erbakir.zerbakiregitim.controller.Main"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-        <content />
+<mvc:View
+    controllerName="com.golive.erbakir.zerbakiregitim.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
+        <content>
+            <table:Table
+                rows="{oMainViewModel>/customerList}"
+                selectionMode="MultiToggle"
+                paste="onPaste"
+                ariaLabelledBy="title"
+                visibleRowCount="20"
+            >
+                <table:extension>
+                    <OverflowToolbar style="Clear">
+                        <Title
+                            id="title"
+                            text="Products"
+                        />
+                    </OverflowToolbar>
+                </table:extension>
+
+                <table:columns>
+                    <table:Column
+                        filterProperty="FirstName"
+                        sortProperty="FirstName"
+                    >
+                        <Label text="{i18n>FirstName}" />
+                        <table:template>
+                            <Text
+                                text="{oMainViewModel>FirstName}"
+                                wrapping="false"
+                            />
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column
+                        filterProperty="LastName"
+                        sortProperty="LastName"
+                    >
+                        <Label text="{i18n>LastName}" />
+                        <table:template>
+                            <Text
+                                text="{oMainViewModel>LastName}"
+                                wrapping="false"
+                            />
+                        </table:template>
+                    </table:Column>
+                    <table:Column
+                        filterProperty="Phone"
+                        sortProperty="Phone"
+                    >
+                        <Label text="{i18n>Phone}" />
+                        <table:template>
+                            <Text
+                                text="{oMainViewModel>Phone}"
+                                wrapping="false"
+                            />
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column
+                        filterProperty="Email"
+                        sortProperty="Email"
+                    >
+                        <Label text="{i18n>Email}" />
+                        <table:template>
+                            <Text
+                                text="{oMainViewModel>Email}"
+                                wrapping="false"
+                            />
+                        </table:template>
+                    </table:Column>
+                    <table:Column
+                        filterProperty="City"
+                        sortProperty="City"
+                    >
+                        <Label text="{i18n>City}" />
+                        <table:template>
+                            <Text
+                                text="{oMainViewModel>City}"
+                                wrapping="false"
+                            />
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column
+                        filterProperty="Country"
+                        sortProperty="Country"
+                    >
+                        <Label text="{i18n>Country}" />
+                        <table:template>
+                            <Text
+                                text="{oMainViewModel>Country}"
+                                wrapping="false"
+                            />
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+            </table:Table>
+        </content>
     </Page>
 </mvc:View>
