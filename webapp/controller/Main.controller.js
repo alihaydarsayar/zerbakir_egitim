@@ -172,7 +172,60 @@ sap.ui.define([
 
             onCancelCreateCustomer: function () {
                 this._oCreateCustomerDialog.close();
+            },
+
+            onDeleteCustomer: function (oEvent) {
+                var that = this;
+
+                var oSource = oEvent.getSource()
+                var oContext = oSource.getBindingContext("oMainViewModel");
+                var sPath = oContext.getPath();
+
+                var oMainViewModel = this.getView().getModel("oMainViewModel");
+
+                var oObject = oMainViewModel.getProperty(sPath);
+
+                var sCustomerID = oObject.CustomerId;
+
+                if (sCustomerID === "" || sCustomerID === undefined || sCustomerID === null) {
+                    MessageToast.show("Customer ID Bulunamadı")
+                    return
+                }
+                //ikinci yöntem
+                if (!sCustomerID) {
+                    MessageToast.show("Customer ID Bulunamadı")
+                    return
+                }
+                // var sPath = oEvent.getSource().getBindingContext("oMainViewModel").getPath();
+                var oModel = this.getOwnerComponent().getModel();
+                debugger;
+
+                sap.ui.core.BusyIndicator.show(0);
+                oModel.remove("/DeleteCustomerSet('" + sCustomerID + "')", {
+                    success: function (oData, oResponse) {
+                        sap.ui.core.BusyIndicator.hide(0);
+                        debugger
+                        that.onGetCustomerList();
+                    },
+                    error: function (oError) {
+                        debugger
+                        sap.ui.core.BusyIndicator.hide(0);
+                        var sErrorMessage = "Hata oluştu!";
+                        try {
+                            var oErrorResponse = JSON.parse(oError.responseText);
+                            if (oErrorResponse.error && oErrorResponse.error.message) {
+                                sErrorMessage = oErrorResponse.error.message.value;
+                            }
+                        } catch (e) {
+                            // JSON parse hatası durumunda default mesajı kullan
+                        }
+
+                        MessageBox.error(sErrorMessage);
+                    }
+                })
+
             }
+
 
         });
     });

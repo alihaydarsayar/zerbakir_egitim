@@ -12,10 +12,11 @@
         <content>
             <table:Table
                 rows="{oMainViewModel>/customerList}"
-                selectionMode="MultiToggle"
+                selectionMode="None"
                 paste="onPaste"
                 ariaLabelledBy="title"
                 visibleRowCount="20"
+                rowActionCount="1"
             >
                 <table:extension>
                     <OverflowToolbar style="Clear">
@@ -33,7 +34,28 @@
                         />
                     </OverflowToolbar>
                 </table:extension>
-
+                <table:rowActionTemplate>
+                    <table:RowAction id="id_rowaction">
+                        <table:RowActionItem
+                            id="id_row_action_item"
+                            icon="sap-icon://delete"
+                            text="Sil"
+                            press="onDeleteCustomer"
+                            type="Delete"
+                        />
+                         <!-- <table:RowActionItem
+                            icon="sap-icon://delete"
+                            text="Sil"
+                            press="onDeleteCustomer"
+                        
+                        />
+                        <table:RowActionItem
+                            icon="sap-icon://detail-view"
+                            text="Detay"
+                            press="onViewCustomerDetails"
+                        /> -->
+                    </table:RowAction>
+                </table:rowActionTemplate>
                 <table:columns>
                     <table:Column
                         filterProperty="FirstName"
