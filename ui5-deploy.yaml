@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "3.1"
+metadata:
+  name: com.golive.erbakir.zerbakiregitim
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          url: http://sap-fio-apd.er-bakir.eris.local:8000/
+          client: '100'
+        app:
+          name: ZFIORI_EGITIM_1
+          description: Fiori Eğitim Uygulaması
+          package: ZFIORI
+          transport: EFTK900100
+        exclude:
+          - /test/

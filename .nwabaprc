@@ -1,0 +1,12 @@
+{
+    "base": "./webapp",
+    "conn_usestrictssl": false,
+    "conn_server": "http://sap-fio-apd.er-bakir.eris.local:8000/",
+    "conn_client": "100",
+    "conn_user": "asayar",
+    "conn_password": "Golive1903*",
+    "abap_transport": "EFTK900100",
+    "abap_package": "ZFIORI",
+    "abap_bsp": "ZFIORI_EGITIM",
+    "abap_bsp_text": "Fiori Eğitim Uygulaması"
+}
