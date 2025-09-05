@@ -34,21 +34,21 @@
                             press="onCreateCustomer"
                         />
 
-                            <Button
+                        <Button
                             id="displayButton"
                             text="Müşteri Detay Görüntüle"
                             type="Critical"
                             icon="sap-icon://display"
                             press="onDisplayCustomer"
                         />
-<ToolbarSeparator  />
-                         <Button
-                id="exportButton"
-                text="{i18n>exportToExcel}"
-                type="Default"
-                icon="sap-icon://excel-attachment"
-                press="onExportToExcel"
-            />
+                        <ToolbarSeparator />
+                        <Button
+                            id="exportButton"
+                            text="{i18n>exportToExcel}"
+                            type="Default"
+                            icon="sap-icon://excel-attachment"
+                            press="onExportToExcel"
+                        />
                     </OverflowToolbar>
                 </table:extension>
                 <table:rowActionTemplate>
@@ -60,7 +60,7 @@
                             press="onDeleteCustomer"
                             type="Delete"
                         />
-                         <!-- <table:RowActionItem
+                        <!-- <table:RowActionItem
                             icon="sap-icon://delete"
                             text="Sil"
                             press="onDeleteCustomer"
