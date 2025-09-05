@@ -1,4 +1,5 @@
 sap.ui.define([
+        // "./BaseController",
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageToast",
@@ -9,6 +10,7 @@ sap.ui.define([
 
 ],
     function (
+        // BaseController
         Controller,
         JSONModel,
         MessageToast,
@@ -19,6 +21,7 @@ sap.ui.define([
     ) {
         "use strict";
         var EdmType = exportLibrary.EdmType;
+        // return BaseController.extend("com.golive.erbakir.zerbakiregitim.controller.Main", {
         return Controller.extend("com.golive.erbakir.zerbakiregitim.controller.Main", {
             onInit: function () {
 
