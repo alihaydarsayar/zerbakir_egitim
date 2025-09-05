@@ -1,5 +1,5 @@
 sap.ui.define([
-        // "./BaseController",
+    // "./BaseController",
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageToast",
@@ -27,6 +27,7 @@ sap.ui.define([
 
                 this.oDataModel = this.getOwnerComponent().getModel();
                 this.oMainModel = this.getOwnerComponent().getModel("mainModel");
+                this.oMainModel.setSizeLimit(999999);
                 var oViewJsonModel = new JSONModel(
                     {
                         busy: false,
@@ -41,6 +42,8 @@ sap.ui.define([
                     }
                 );
                 this.getView().setModel(oViewJsonModel, "oMainViewModel");
+                // this.getView().getModel("oMainViewModel").setSizeLimit(999999)
+
 
                 // Müşteri oluşturma için model
                 var oCreateCustomerModel = new JSONModel({
