@@ -12,11 +12,12 @@
         <content>
             <table:Table
                 rows="{oMainViewModel>/customerList}"
-                selectionMode="None"
+                selectionMode="Single"
                 paste="onPaste"
                 ariaLabelledBy="title"
                 visibleRowCount="20"
                 rowActionCount="1"
+                id="id_table"
             >
                 <table:extension>
                     <OverflowToolbar style="Clear">
@@ -31,6 +32,14 @@
                             type="Success"
                             icon="sap-icon://add"
                             press="onCreateCustomer"
+                        />
+
+                            <Button
+                            id="displayButton"
+                            text="Müşteri Detay Görüntüle"
+                            type="Critical"
+                            icon="sap-icon://display"
+                            press="onDisplayCustomer"
                         />
                     </OverflowToolbar>
                 </table:extension>

@@ -1,0 +1,94 @@
+<mvc:View
+    controllerName="com.golive.erbakir.zerbakiregitim.controller.CustomerDetail"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+>
+    <Page
+        id="id_cusomterdetail_page"
+        title="{oDetailViewModel>/title}"
+    >
+        <content>
+            <Panel
+                headerText="Müşteri Bilgileri"
+                class="sapUiResponsiveMargin"
+                width="auto"
+                expandable="true"
+                expanded="true"
+            >
+                <content>
+                    <f:SimpleForm
+                        id="customerDetailsForm"
+                        editable="false"
+                        layout="ResponsiveGridLayout"
+                        labelSpanXL="3"
+                        labelSpanL="3"
+                        labelSpanM="3"
+                        labelSpanS="12"
+                        adjustLabelSpan="false"
+                        emptySpanXL="4"
+                        emptySpanL="4"
+                        emptySpanM="4"
+                        emptySpanS="0"
+                        columnsXL="2"
+                        columnsL="2"
+                        columnsM="2"
+                        singleContainerFullSize="false"
+                    >
+                        <f:content>
+                            <core:Title text="" />
+                            <!-- First Name -->
+                            <Label text="Ad" />
+                            <!-- <Text text="{customerDetailModel>/FirstName}" /> -->
+
+                            <!-- <ObjectStatus
+							
+							title="{customerDetailModel>/FirstName}"
+							icon="sap-icon://sys-enter-2"
+                            text="{customerDetailModel>/LastName}"
+							state="Success" /> -->
+                            <ObjectStatus
+                                title="{customerDetailModel>/FirstName}"
+                                icon="sap-icon://sys-enter-2"
+                                state="Success"
+                            />
+                            <Label text="Soyad" />
+                            <Text text="{customerDetailModel>/LastName}" />
+
+                            <!-- Customer ID -->
+                            <Label text="Müşteri ID" />
+                            <!-- <Text text="{customerDetailModel>/CustomerId}" /> -->
+
+                            <ObjectStatus
+                                text="{customerDetailModel>/CustomerId}"
+                                icon="sap-icon://information"
+                                state="Information"
+                            />
+
+                            <core:Title text="" />
+                            <!-- Email -->
+                            <Label text="Email" />
+                            <Text text="{customerDetailModel>/Email}" />
+
+                            <!-- City -->
+                            <Label text="Şehir" />
+                            <Text text="{customerDetailModel>/City}" />
+
+                            <!-- Country -->
+                            <Label text="Ülke" />
+                            <Text
+                                text="{
+                                path:'customerDetailModel>/Country', 
+                                formatter:'.formatter.formatUlke'
+                                }"
+                            />
+                        </f:content>
+                    </f:SimpleForm>
+                </content>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>

@@ -81,7 +81,7 @@
                 text="Kaydet"
                 type="Emphasized"
                 press="onSaveCustomer"
-                enabled="{= ${createCustomerModel>/IvFirstName} !== '' }"
+                enabled="{= ${createCustomerModel>/IvFirstName} !== ''  &amp;&amp; ${createCustomerModel>/IvFirstName}.length > 1 }"
                 busy="{oMainViewModel>/busy}"
             />
             <Button

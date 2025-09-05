@@ -41,6 +41,9 @@ sap.ui.define([
                 this.setModel(oGlobalCompJsonModel, "oGlobalCompModel");
 
 
+                this.getAggregation("rootControl").addStyleClass("egitimStyleClass");
+
+
             }
         });
     }

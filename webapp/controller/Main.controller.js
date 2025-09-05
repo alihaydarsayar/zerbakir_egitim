@@ -224,7 +224,45 @@ sap.ui.define([
                     }
                 })
 
+            },
+            onDisplayCustomer: function (oEvent) {
+
+                var oTable = this.getView().byId("id_table");
+                debugger
+                var iSelectedIndex = oTable.getSelectedIndex();
+
+                // if(iSelectedIndex <0){
+                //    return MessageToast.show("Lütfen Müşteri listesinden seçim yapınız!")
+                // }
+
+                if (iSelectedIndex >= 0) {
+
+
+                    var oContext = oTable.getContextByIndex(iSelectedIndex);
+                    var oObject = oContext.getObject();
+                    this.oMainModel.setProperty("/selectedCustomer", oObject)
+
+                    var sCustomerId = oObject.CustomerId;
+                    var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+                    oRouter.navTo("RouteDetail", {
+                        customerId: sCustomerId
+                    })
+
+                } else {
+                    MessageToast.show("Lütfen Müşteri listesinden seçim yapınız!");
+                    return;
+
+                }
+
+
+
+
+
+
             }
+
+
+
 
 
         });
