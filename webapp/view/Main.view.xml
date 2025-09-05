@@ -41,6 +41,14 @@
                             icon="sap-icon://display"
                             press="onDisplayCustomer"
                         />
+<ToolbarSeparator  />
+                         <Button
+                id="exportButton"
+                text="{i18n>exportToExcel}"
+                type="Default"
+                icon="sap-icon://excel-attachment"
+                press="onExportToExcel"
+            />
                     </OverflowToolbar>
                 </table:extension>
                 <table:rowActionTemplate>

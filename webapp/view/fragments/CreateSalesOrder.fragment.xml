@@ -1,0 +1,150 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:table="sap.ui.table"
+>
+    <Dialog
+        id="createSalesOrderDialog"
+        title="Sipariş Oluştur"
+    
+        contentWidth="60rem"
+        contentHeight="50rem"
+        resizable="true"
+        draggable="true"
+        busy="{oDetailViewModel>/busy}"
+    >
+        <content>
+            <VBox class="sapUiMediumMargin">
+                <!-- Sipariş Genel Bilgileri -->
+                <Panel
+                    headerText="Sipariş Bilgileri"
+      
+                    expandable="true"
+                    expanded="true"
+                >
+                    <content>
+                        <f:SimpleForm
+                            editable="true"
+                            layout="ResponsiveGridLayout"
+                            labelSpanXL="4"
+                            labelSpanL="4"
+                            labelSpanM="4"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="0"
+                            emptySpanL="0"
+                            emptySpanM="0"
+                            emptySpanS="0"
+                            columnsXL="1"
+                            columnsL="1"
+                            columnsM="1"
+                            singleContainerFullSize="false"
+                        >
+                            <f:content>
+                                <Label text="Sipariş Tarihi" required="true" />
+                                <DatePicker
+                               
+                                    value="{path: 'createSalesOrderModel>/OrderDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd.MM.yyyy'}}"
+                                    displayFormat="dd.MM.yyyy"
+                                    valueFormat="yyyy-MM-dd"
+                                    placeholder="Sipariş tarihini seçin"
+                                />
+                              
+                                <Label text="Açıklama" />
+                                <TextArea
+                                    value="{createSalesOrderModel>/Description}"
+                                    placeholder="Sipariş açıklamasını girin"
+                                    rows="3"
+                                />
+                            </f:content>
+                        </f:SimpleForm>
+                    </content>
+                </Panel>
+
+                <!-- Sipariş Kalemleri -->
+                <Panel
+                    headerText="Sipariş Kalemleri"
+                    expandable="true"
+                    expanded="true"
+                >
+                    <content>
+                        <VBox>
+                            <Table
+                                id="orderItemsTable"
+                                items="{createSalesOrderModel>/CreateSalesOrderItemSet}"
+                                mode="Delete"
+                                delete="onDeleteOrderItem"
+                                growing="false"
+                                noDataText="Henüz sipariş kalemi eklenmedi"
+                            >
+                                <headerToolbar>
+                                    <Toolbar>
+                                        <Title
+                                            text="Sipariş Kalemleri ({createSalesOrderModel>/CreateSalesOrderItemSet/length})"
+                                        />
+                                        <ToolbarSpacer />
+                                        <Button
+                                            text="Kalem Ekle"
+                                            icon="sap-icon://add"
+                                            type="Emphasized"
+                                            press="onAddOrderItem"
+                                        />
+                                    </Toolbar>
+                                </headerToolbar>
+
+                                <columns>
+                                    <Column>
+                                        <Text text="Sıra No" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="Ürün ID" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="Miktar" />
+                                    </Column>
+                                </columns>
+
+                                <items>
+                                    <ColumnListItem>
+                                        <cells>
+                                            <Input
+                                                value="{createSalesOrderModel>Posnr}"
+                                                placeholder="010, 020, ..."
+                                                maxLength="3"
+                                            />
+                                            <Input
+                                                value="{createSalesOrderModel>ProductId}"
+                                                placeholder="Ürün ID girin"
+                                                maxLength="20"
+                                            />
+                                            <Input
+                                                value="{createSalesOrderModel>Quantity}"
+                                                type="Number"
+                                                placeholder="Miktar girin"
+                                            />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </VBox>
+                    </content>
+                </Panel>
+            </VBox>
+        </content>
+
+        <buttons>
+            <Button
+                text="İptal"
+                press="onCancelCreateSalesOrder"
+            />
+            <Button
+                text="Kaydet"
+            
+                press="onSaveCreateSalesOrder"
+                icon="sap-icon://save"
+                class="myButtonSOCreate"
+            />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

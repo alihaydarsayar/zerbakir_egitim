@@ -19,6 +19,19 @@
                 expandable="true"
                 expanded="true"
             >
+                <headerToolbar>
+                    <Toolbar>
+                        <Title text="Müşteri Bilgileri" />
+                        <ToolbarSpacer />
+                        <Button
+                            id="createSalesOrderButton"
+                            text="Sipariş Oluştur"
+                            type="Emphasized"
+                            icon="sap-icon://cart-3"
+                            press="onCreateSalesOrder"
+                        />
+                    </Toolbar>
+                </headerToolbar>
                 <content>
                     <f:SimpleForm
                         id="customerDetailsForm"
@@ -87,6 +100,127 @@
                             />
                         </f:content>
                     </f:SimpleForm>
+                </content>
+            </Panel>
+
+            <List
+                id="ordersList"
+                class="sapUiResponsiveMargin"
+                width="auto"
+                items="{orderListModel>/orders}"
+                busy="{oDetailViewModel>/orderListBusy}"
+                noDataText="Bu müşteriye ait sipariş bulunamadı."
+            >
+                <headerToolbar>
+                    <Toolbar>
+                        <Title
+                            text="Müşteri Siparişleri ({oDetailViewModel>/orderCount})"
+                        />
+                    </Toolbar>
+                </headerToolbar>
+                <items>
+                    <ObjectListItem
+                        type="Navigation"
+                        press=".onOrderPress"
+                        title="Sipariş No: {orderListModel>Vbeln}"
+                        intro="{orderListModel>Description}"
+                    >
+                        <attributes>
+                            <ObjectAttribute
+                                title="Sipariş Tarihi"
+                                text="{
+                                    path: 'orderListModel>OrderDate',
+                                    type: 'sap.ui.model.type.Date',
+                                    formatOptions: {
+                                        style: 'medium',
+                                        strictParsing: true
+                                    }
+                                }"
+                            />
+                        </attributes>
+                    </ObjectListItem>
+                </items>
+            </List>
+
+
+                 <Panel
+                headerText="Müşteri Siparişleri ({oDetailViewModel>/orderCount})"
+                class="sapUiResponsiveMargin"
+                width="auto"
+                expandable="true"
+                expanded="true"
+                busy="{oDetailViewModel>/orderListBusy}"
+            >
+                <content>
+                    <VBox items="{orderListModel>/orders}">
+                        <items>
+                            <Panel
+                                expandable="true"
+                                expanded="false"
+                                class="sapUiSmallMarginBottom"
+                            >
+                                <headerToolbar>
+                                    <Toolbar>
+                                        <Title text="Sipariş No: {orderListModel>Vbeln}" />
+                                        <Text text="{orderListModel>Description}" class="sapUiTinyMarginBegin"/>
+                                        <ToolbarSpacer/>
+                                        <VBox alignItems="End" class="sapUiSmallMarginEnd">
+                                            <Label text="Sipariş Tarihi" design="Bold"/>
+                                            <Text
+                                                text="{
+                                                    path: 'orderListModel>OrderDate',
+                                                    type: 'sap.ui.model.type.Date',
+                                                    formatOptions: {
+                                                        style: 'medium',
+                                                        strictParsing: true
+                                                    }
+                                                }"
+                                            />
+                                        </VBox>
+                                    </Toolbar>
+                                </headerToolbar>
+                                <content>
+                                    <Table
+                                        items="{orderListModel>GetOrderListItemSet/results}"
+                                        noDataText="Bu siparişe ait kalem bulunamadı."
+                                        class="sapUiTinyMarginTopBottom"
+                                    >
+                                        <columns>
+                                            <Column width="6rem">
+                                                <Text text="Kalem No" />
+                                            </Column>
+                                            <Column>
+                                                <Text text="Ürün ID" />
+                                            </Column>
+                                            <Column hAlign="End" width="8rem">
+                                                <Text text="Miktar" />
+                                            </Column>
+                                        </columns>
+                                        <items>
+                                            <ColumnListItem>
+                                                <cells>
+                                                    <Text text="{orderListModel>Posnr}" />
+                                                    <Text text="{orderListModel>ProductId}" />
+                                                    <ObjectNumber
+                                                        number="{
+                                                            path: 'orderListModel>Quantity',
+                                                            type: 'sap.ui.model.type.Float',
+                                                            formatOptions: {
+                                                                minFractionDigits: 3,
+                                                                maxFractionDigits: 3
+                                                            }
+                                                        }"
+                                                        unit=""
+                                                        textAlign="End"
+                                                    />
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                                    </Table>
+                                    </content>
+                            </Panel>
+                        </items>
+                    </VBox>
                 </content>
             </Panel>
         </content>

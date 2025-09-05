@@ -3,17 +3,22 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageToast",
     "sap/m/MessageBox",
-    "sap/ui/core/Fragment"
+    "sap/ui/core/Fragment",
+    "sap/ui/export/Spreadsheet",
+    "sap/ui/export/library",
+
 ],
     function (
         Controller,
         JSONModel,
         MessageToast,
         MessageBox,
-        Fragment
+        Fragment,
+        Spreadsheet,
+        exportLibrary
     ) {
         "use strict";
-
+        var EdmType = exportLibrary.EdmType;
         return Controller.extend("com.golive.erbakir.zerbakiregitim.controller.Main", {
             onInit: function () {
 
@@ -259,6 +264,83 @@ sap.ui.define([
 
 
 
+            },
+
+            createColumnConfig: function () {
+                var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+                return [
+                    {
+                        label: oResourceBundle.getText("FirstName"),
+                        property: "FirstName",
+                        type: EdmType.String
+                    },
+                    {
+                        label: oResourceBundle.getText("LastName"),
+                        property: "LastName",
+                        type: EdmType.String
+                    },
+                    {
+                        label: oResourceBundle.getText("Phone"),
+                        property: "Phone",
+                        type: EdmType.String
+                    },
+                    {
+                        label: oResourceBundle.getText("Email"),
+                        property: "Email",
+                        type: EdmType.String
+                    },
+                    {
+                        label: oResourceBundle.getText("City"),
+                        property: "City",
+                        type: EdmType.String
+                    },
+                    {
+                        label: oResourceBundle.getText("Country"),
+                        property: "Country",
+                        type: EdmType.String
+                    }
+                ];
+            },
+
+
+            /**
+             * @function onExportToExcel
+             * @description Tablodaki müşteri verilerini bir Excel dosyasına aktarır.
+             * @author Ali Haydar Sayar
+             * @date 2025-09-05
+             */
+            onExportToExcel: function () {
+                var oTable = this.byId("id_table");
+                var oModel = oTable.getModel("oMainViewModel");
+                var aRows = oModel.getProperty("/customerList");
+
+                if (!aRows || aRows.length === 0) {
+                    MessageToast.show(this.getResourceBundle().getText("noDataToExport"));
+                    return;
+                }
+
+                var aCols = this.createColumnConfig();
+
+                var oSettings = {
+                    workbook: {
+                        columns: aCols
+                    },
+                    dataSource: aRows,
+                    fileName: "MusteriListesi.xlsx",
+                    worker: false // Basit senaryolarda ve CSP sorunlarını önlemek için false olarak ayarlanması önerilir
+                };
+
+                var oSheet = new Spreadsheet(oSettings);
+                this.getView().setBusy(true); // Kullanıcıya işlem yapıldığını göster
+
+                oSheet.build().then(function () {
+                    MessageToast.show(this.getResourceBundle().getText("exportSuccess"));
+                }.bind(this)).catch(function (sError) {
+                    MessageBox.error(this.getResourceBundle().getText("exportError", [sError]));
+                }.bind(this)).finally(function () {
+                    this.getView().setBusy(false); // İşlem bitince busy indicator'ı kaldır
+                    oSheet.destroy(); // Bellek sızıntılarını önlemek için nesneyi yok et
+                }.bind(this));
             }
 
 

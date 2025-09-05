@@ -1,0 +1,65 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+        id="orderItemsDialog"
+        title="{dialogModel>/title}"
+        contentWidth="auto"
+        contentHeight="auto"
+        draggable="true"
+        resizable="true"
+    >
+        <content>
+            <Table
+                id="orderItemsTable"
+                items="{dialogModel>/items}"
+                noDataText="Bu siparişe ait kalem bulunamadı."
+
+            >
+                <headerToolbar>
+                    <Toolbar>
+                        <Title text="Kalemler" level="H2"/>
+                    </Toolbar>
+                </headerToolbar>
+                <columns>
+                    <Column width="6rem">
+                        <Text text="Kalem No" />
+                    </Column>
+                    <Column width="6rem">
+                        <Text text="Ürün ID" />
+                    </Column>
+                    <Column hAlign="End" width="8rem">
+                        <Text text="Miktar" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{dialogModel>Posnr}" />
+                            <Text text="{dialogModel>ProductId}" />
+                            <ObjectNumber
+                                number="{
+                                    path: 'dialogModel>Quantity',
+                                    type: 'sap.ui.model.type.Float',
+                                    formatOptions: {
+                                        minFractionDigits: 3,
+                                        maxFractionDigits: 3
+                                    }
+                                }"
+                                unit=""
+                                textAlign="End"
+                            />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+        <endButton>
+            <Button
+                text="Kapat"
+                press="onCloseOrderItemsDialog"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>
